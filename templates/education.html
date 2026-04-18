@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayhoffDock - Guía Educativa de Docking Molecular</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/education.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-atom"></i> DayhoffDock: Aprende sobre Docking Molecular</h1>
+            <p>Guía educativa para entender los principios del docking molecular</p>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url_for('education') }}" class="nav-link active"><i class="fas fa-book"></i> Guía
+                    Educativa</a>
+                <a href="{{ url_for('tutorials') }}" class="nav-link"><i class="fas fa-graduation-cap"></i>
+                    Tutoriales</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="education-section">
+                <div class="toc-panel">
+                    <h3>Contenidos</h3>
+                    <ul class="toc-list">
+                        <li><a href="#intro" class="toc-link active">Introducción al Docking Molecular</a></li>
+                        <li><a href="#fundamentals" class="toc-link">Fundamentos Teóricos</a></li>
+                        <li><a href="#process" class="toc-link">Proceso de Docking</a></li>
+                        <li><a href="#algorithms" class="toc-link">Algoritmos de Docking</a></li>
+                        <li><a href="#scoring" class="toc-link">Funciones de Puntuación</a></li>
+                        <li><a href="#autodock" class="toc-link">AutoDock Vina</a></li>
+                        <li><a href="#interpretation" class="toc-link">Interpretación de Resultados</a></li>
+                        <li><a href="#interactions" class="toc-link">Interacciones Moleculares</a></li>
+                        <li><a href="#limitations" class="toc-link">Limitaciones y Consideraciones</a></li>
+                        <li><a href="#applications" class="toc-link">Aplicaciones en Investigación</a></li>
+                        <li><a href="#glossary" class="toc-link">Glosario de Términos</a></li>
+                    </ul>
+                </div>
+
+                <div class="content-panel">
+                    <section id="intro" class="content-section active">
+                        <h2>Introducción al Docking Molecular</h2>
+                        <div class="illustration">
+                            <img src="{{ url_for('static', filename='images/docking_overview.png') }}"
+                                alt="Visión general del docking molecular">
+                            <p class="caption">Fig. 1: Visión general del proceso de docking molecular</p>
+                        </div>
+                        <p>El <strong>docking molecular</strong> , introducido originalmente por Kuntz et al. 1982, es
+                            un método computacional que virtualmente intenta predecir un complejo de (usualmente) dos
+                            parejas de enlace. Típicamente, estas parejas de enlace son macromoléculas biológicas (p.
+                            ej., proteína, ADN/ARN, péptido) o moléculas pequeñas (p. ej., ligandos endógenos,
+                            fármacos).</p>
+                        <p>El docking molecular es una herramienta clave en la biología molecular estructural y el
+                            diseño de fármacos asistido por computadora. El objetivo del acoplamiento ligando-proteína
+                            es predecir el modo o los modos de unión predominantes de un ligando con una proteína de
+                            estructura tridimensional conocida.</p>
+                        <p>Los métodos de docking molecular utilizan una función de puntuación que clasifica
+                            correctamente los posibles acoplamientos. El acoplamiento permite realizar un cribado
+                            virtual en grandes bibliotecas de compuestos, clasificar los resultados y proponer hipótesis
+                            estructurales sobre cómo los ligandos inhiben la diana, lo cual resulta invaluable en la
+                            optimización de fármacos.</p>
+                        <p><strong>Referencias:</strong></p>
+                        <ul>
+                            <li>Kuntz, I.; Blaney, J.; Oatley, S.; Langridge, R.; Ferrin, T. Un enfoque geométrico para
+                                las interacciones macromolécula-ligando. J. Mol. Biol. 1982 , 161 , 269–288. </li>
+                            <li>Morris GM, Lim-Wilby M. Molecular docking. Methods Mol Biol. 2008;443:365-82. doi:
+                                10.1007/978-1-59745-177-2_19. </li>
+                            <li>Pantsar T, Poso A. Binding Affinity via Docking: Fact and Fiction. Molecules. 2018;
+                                23(8):1899. https://doi.org/10.3390/molecules23081899</li>
+                        </ul>
+
+                        <div class="key-concepts">
+                            <h3>Conceptos Clave</h3>
+                            <div class="concept-cards">
+                                <div class="concept-card">
+                                    <div class="concept-icon"><i class="fas fa-key"></i></div>
+                                    <h4>Llave-Cerradura</h4>
+                                    <p>El modelo conceptual más básico en biología molecular, donde el ligando (llave)
+                                        encaja en el receptor (cerradura).</p>
+                                </div>
+                                <div class="concept-card">
+                                    <div class="concept-icon"><i class="fas fa-arrows-alt"></i></div>
+                                    <h4>Grados de Libertad</h4>
+                                    <p>Las posibles rotaciones y traslaciones que una molécula puede experimentar
+                                        durante el docking.</p>
+                                </div>
+                                <div class="concept-card">
+                                    <div class="concept-icon"><i class="fas fa-chart-line"></i></div>
+                                    <h4>Energía de Unión</h4>
+                                    <p>La fuerza de la interacción entre el ligando y el receptor, generalmente medida
+                                        en kcal/mol.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="education-cta">
+                            <p>¿Quieres ver el docking en acción?</p>
+                            <a href="{{ url_for('index') }}" class="cta-button"><i class="fas fa-flask"></i> Prueba el
+                                Docking Ahora</a>
+                        </div>
+                    </section>
+
+                    <section id="fundamentals" class="content-section">
+                        <h2>Fundamentos Teóricos</h2>
+                        <div class="illustration">
+                            <img src="{{ url_for('static', filename='images/energy_landscape.png') }}"
+                                alt="Paisaje de energía en docking molecular">
+                            <p class="caption">Fig. 2: Paisaje de energía que representa las posibles conformaciones.
+                                Tomado de: Mobley DL, Dill KA. Binding of small-molecule ligands to proteins: "what you
+                                see" is not always "what you get". Structure. 2009 Apr 15;17(4):489-98. doi:
+                                10.1016/j.str.2009.02.010.</p>
+                        </div>
+
+                        <p>El docking molecular se basa en principios de <strong>termodinámica</strong> y
+                            <strong>biofísica</strong>. La formación de un complejo proteína-ligando está gobernada por
+                            su estabilidad termodinámica, representada por el <strong>cambio en la energía libre de
+                                Gibbs (ΔG)</strong>.
+                        </p>
+
+                        <div class="theory-box">
+                            <p>La energía libre de unión de Gibbs está directamente relacionada con la concentración de
+                                equilibrio de los complejos de ligando ([PL]) y proteína ([P]) unidos y no unidos, según
+                            </p>
+                            <div class="equation">ΔG<sup>°</sup><sub>bind</sub> = RT ln(K<sub>D</sub>/C<sub>0</sub>)
+                            </div>
+                            <p>Donde:</p>
+                            <ul>
+                                <li><strong>ΔG<sup>°</sup><sub>bind</sub></strong> = Energía libre estándar de unión
+                                    (kcal/mol)</li>
+                                <li><strong>R</strong> = Constante universal de los gases</li>
+                                <li><strong>T</strong> = Temperatura absoluta (K)</li>
+                                <li><strong>K<sub>D</sub></strong> = Constante de disociación</li>
+                                <li><strong>C<sub>0</sub></strong> = Concentración de referencia estándar (1 mol/L)</li>
+                            </ul>
+
+                            <p>La constante de disociación \( K_D \) se define como:</p>
+                            <div class="equation">K<sub>D</sub> = ([L][P]) / [PL]</div>
+                            <p>Un valor <strong>menor</strong> de K<sub>D</sub> indica una <strong>mayor
+                                    afinidad</strong> entre el ligando y la proteína.</p>
+                            <p><strong>Referencia:</strong> Decherchi S, Cavalli A. Thermodynamics and Kinetics of
+                                Drug-Target Binding by Molecular Simulation. <em>Chem Rev</em>. 2020 Dec
+                                9;120(23):12788-12833. doi: <a
+                                    href="https://doi.org/10.1021/acs.chemrev.0c00534">10.1021/acs.chemrev.0c00534</a>.
+                            </p>
+
+                        </div>
+
+                        <h3>Interacciones Moleculares Clave</h3>
+                        <div class="two-columns">
+                            <div>
+                                <h4>Fuerzas de Van der Waals</h4>
+                                <p>Interacciones débiles y no específicas que ocurren cuando dos átomos están lo
+                                    suficientemente cerca. Incluyen:</p>
+                                <ul>
+                                    <li>Fuerzas de dispersión de London</li>
+                                    <li>Interacciones dipolo-dipolo</li>
+                                    <li>Interacciones dipolo-dipolo inducido</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Interacciones Electrostáticas</h4>
+                                <p>Fuerzas entre cargas eléctricas que pueden ser:</p>
+                                <ul>
+                                    <li>Atractivas (cargas opuestas)</li>
+                                    <li>Repulsivas (cargas iguales)</li>
+                                    <li>Incluyen puentes salinos y enlaces iónicos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4>Enlaces de Hidrógeno</h4>
+                                <p>Interacciones direccionales entre un átomo de hidrógeno unido covalentemente a un
+                                    átomo electronegativo (donador) y otro átomo electronegativo (aceptor).</p>
+                            </div>
+                            <div>
+                                <h4>Interacciones Hidrofóbicas</h4>
+                                <p>Tendencia de los grupos no polares a asociarse en solución acuosa, minimizando su
+                                    contacto con el agua.</p>
+                            </div>
+                        </div>
+
+                        <div class="theory-box">
+                            <h3>Flexibilidad Molecular</h3>
+                            <p>Un desafío importante en el docking es modelar la <strong>flexibilidad</strong> de las
+                                moléculas:</p>
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Docking Rígido</h4>
+                                    <p>Tanto el ligando como el receptor se tratan como cuerpos rígidos sin cambios
+                                        conformacionales.</p>
+                                    <p><em>Pros:</em> Computacionalmente eficiente</p>
+                                    <p><em>Contras:</em> Menos preciso biológicamente</p>
+                                </div>
+                                <div>
+                                    <h4>Docking Flexible</h4>
+                                    <p>Permite cambios conformacionales en el ligando y/o en el receptor.</p>
+                                    <p><em>Pros:</em> Más realista biológicamente</p>
+                                    <p><em>Contras:</em> Computacionalmente costoso</p>
+                                </div>
+                            </div>
+                            <div class="illustration">
+                                <img src="{{ url_for('static', filename='images/flex_molecular.png') }}"
+                                    alt="Paisaje de energía en docking molecular">
+                                <p class="caption">Fig. 2: Paisaje de energía que representa las posibles
+                                    conformaciones.
+                                    Tomado de: Mohanty, M., Mohanty, P.S. Molecular docking in organic, inorganic, and
+                                    hybrid systems: a tutorial review. Monatsh Chem 154, 683–707 (2023).
+                                    https://doi.org/10.1007/s00706-023-03076-1.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="process" class="content-section">
+                        <h2>Proceso de Docking</h2>
+                        <div class="process-diagram">
+                            <img src="{{ url_for('static', filename='images/docking_process.png') }}"
+                                alt="Proceso de docking paso a paso">
+                            <p class="caption">Fig. 3: Flujo de trabajo típico del docking molecular</p>
+                        </div>
+
+                        <p>El proceso de docking molecular generalmente sigue estos pasos fundamentales:</p>
+
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>Preparación del Receptor</h3>
+                                    <p>Obtención y preparación de la estructura proteica:</p>
+                                    <ul>
+                                        <li>Selección de estructura (cristalografía de rayos X, RMN, modelado por
+                                            homología)</li>
+                                        <li>Limpieza de la estructura (eliminación de aguas, ligandos, iones no
+                                            relevantes)</li>
+                                        <li>Adición de hidrógenos y asignación de cargas</li>
+                                        <li>Definición del sitio de unión</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>Preparación del Ligando</h3>
+                                    <p>Preparación de la molécula pequeña:</p>
+                                    <ul>
+                                        <li>Generación de estructura 3D</li>
+                                        <li>Asignación de cargas parciales</li>
+                                        <li>Identificación de enlaces rotables</li>
+                                        <li>Generación de confórmeros (estados tautómeros, protonación)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>Configuración del Grid</h3>
+                                    <p>Definición del espacio de búsqueda:</p>
+                                    <ul>
+                                        <li>Centrado en el sitio activo o sitio de unión conocido</li>
+                                        <li>Ajuste del tamaño de la caja (dimensiones X, Y, Z)</li>
+                                        <li>Determinación de la resolución del grid</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3>Algoritmo de Búsqueda</h3>
+                                    <p>Exploración del espacio conformacional:</p>
+                                    <ul>
+                                        <li>Muestreo de posibles posiciones del ligando</li>
+                                        <li>Evaluación de la complementariedad con el receptor</li>
+                                        <li>Aplicación de restricciones (si corresponde)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h3>Puntuación</h3>
+                                    <p>Evaluación de las poses generadas:</p>
+                                    <ul>
+                                        <li>Cálculo de energías de interacción</li>
+                                        <li>Clasificación de poses por puntuación</li>
+                                        <li>Identificación de las mejores poses</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">6</div>
+                                <div class="step-content">
+                                    <h3>Análisis de Resultados</h3>
+                                    <p>Interpretación de los datos obtenidos:</p>
+                                    <ul>
+                                        <li>Visualización de las poses mejor puntuadas</li>
+                                        <li>Análisis de interacciones clave (enlaces de hidrógeno, etc.)</li>
+                                        <li>Validación con datos experimentales (cuando sea posible)</li>
+                                        <li>Refinamiento de modelos o experimentos adicionales</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Consejo Práctico</h3>
+                            <p>Siempre verifica la calidad del receptor antes del docking. Una buena estructura
+                                cristalográfica con alta resolución (&lt;2.5Å) generalmente proporciona resultados más
+                                confiables. Las estructuras de RMN pueden requerir un procesamiento adicional para
+                                seleccionar el modelo más representativo.</p>
+                        </div>
+                    </section>
+
+                    <section id="algorithms" class="content-section">
+                        <h2>Algoritmos de Docking</h2>
+
+                        <p>Los algoritmos de docking son el corazón de los programas de modelado molecular, responsables
+                            de explorar eficientemente el vasto espacio conformacional de las posibles interacciones
+                            ligando-receptor.</p>
+
+                        <div class="algorithms-comparison">
+                            <h3>Principales Enfoques Algorítmicos</h3>
+
+                            <div class="algorithm-card">
+                                <h4><i class="fas fa-random"></i> Algoritmos Estocásticos</h4>
+                                <p>Utilizan elementos aleatorios para explorar el espacio conformacional y encontrar
+                                    mínimos de energía.</p>
+                                <div class="algorithm-examples">
+                                    <div class="algorithm-example">
+                                        <h5>Monte Carlo</h5>
+                                        <p>Las simulaciones MC se introdujeron inicialmente como un procedimiento de
+                                            minimización en aplicaciones de dinámica molecular, como las implementadas
+                                            en GROMACS y GROMOS, y posteriormente se adaptaron para algoritmos de
+                                            acoplamiento flexible como MCDOCK e ICM.</p>
+                                        <p>Además, las simulaciones MC han demostrado su capacidad para determinar
+                                            constantes de unión relativas precisas y exactas para sistemas proteicos. Es
+                                            un buen método para analizar sistemas biomoleculares en diferentes
+                                            condiciones termodinámicas. Sin embargo, este método no es adecuado para
+                                            evaluar procesos dependientes del tiempo, como las simulaciones de dinámica
+                                            molecular.</p>
+                                    </div>
+                                    <div class="algorithm-example">
+                                        <h5>Algoritmos Genéticos</h5>
+                                        <p>Los AG tienen el propósito de encontrar o aproximar soluciones a problemas de
+                                            búsqueda y, en el caso del acoplamiento molecular, intentar encontrar la
+                                            conformación exacta o más cercana al mínimo de energía global. En la
+                                            programación de algoritmos genéticos, el cruce, un operador genético que
+                                            combina (aparea) dos cromosomas (progenitores) para producir un nuevo
+                                            cromosoma (descendencia), se aplica para generar un nuevo cromosoma que
+                                            podría ser mejor que ambos progenitores si toma las mejores características
+                                            de cada uno. Este proceso, que intercambia grandes regiones de los
+                                            progenitores, está permitido en algoritmos genéticos. En este proceso se
+                                            utilizan numerosas funciones de puntuación complejas, que tienen en cuenta
+                                            un conjunto de parámetros, como las tasas de mutación, las tasas de cruce y
+                                            el número de rondas evolutivas.</p>
+                                        <p>El algoritmo AG adoptado por GOLD requiere como entrada el tamaño aproximado
+                                            y la ubicación del sitio activo del receptor y también las coordenadas de la
+                                            proteína y la conformación de un ligando.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="algorithm-card">
+                                <h4><i class="fas fa-puzzle-piece"></i> Algoritmos Sistemáticos</h4>
+                                <p>Exploran metódicamente el espacio conformacional mediante un enfoque incremental.</p>
+                                <div class="algorithm-examples">
+                                    <div class="algorithm-example">
+                                        <h5>Construcción Incremental</h5>
+                                        <p>Este método divide el ligando en fragmentos que se acoplan por separado en el
+                                            sitio receptor. Tras el acoplamiento de los fragmentos, las partes se
+                                            fusionan. Esta fragmentación permite que el algoritmo considere la
+                                            flexibilidad del ligando. Los fragmentos rígidos acoplados inicialmente
+                                            funcionan como "anclajes" que se unen secundariamente mediante partes
+                                            flexibles del ligando con enlaces rotatorios. De esta manera, el ligando se
+                                            construye gradualmente dentro del sitio de unión del receptor.</p>
+                                        <p>También conocido como métodos de anclaje y crecimiento, el algoritmo IC se ha
+                                            empleado en varios programas de docking como DOCK, FLEXX, FLOG y Surflex.
+                                        </p>
+                                    </div>
+                                    <div class="algorithm-example">
+                                        <h5>Matching de Formas</h5>
+                                        <p>Alinea características complementarias entre el ligando y el receptor.</p>
+                                        <p><strong>Ejemplo:</strong> FRED</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="algorithm-card">
+                                <h4><i class="fas fa-bolt"></i> Métodos de Optimización</h4>
+                                <p>Buscan el mínimo global de energía mediante técnicas de optimización avanzadas.</p>
+                                <div class="algorithm-examples">
+                                    <div class="algorithm-example">
+                                        <h5>Optimización de Enjambre de Partículas</h5>
+                                        <p>Simula el comportamiento social de aves u otros animales para explorar el
+                                            espacio de soluciones.</p>
+                                        <p><strong>Ejemplo:</strong> Algunas variantes de docking modernas</p>
+                                    </div>
+                                    <div class="algorithm-example">
+                                        <h5>Optimización Iterated Local Search</h5>
+                                        <p>Combina búsqueda local con perturbaciones para escapar de mínimos locales.
+                                        </p>
+                                        <p><strong>Ejemplo:</strong> AutoDock Vina</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p><strong>Referencias:</strong></p>
+                            <ul>
+                                <li>Kuntz, I.; Blaney, J.; Oatley, S.; Langridge, R.; Ferrin, T. Un enfoque geométrico
+                                    para
+                                    las interacciones macromolécula-ligando. J. Mol. Biol. 1982 , 161 , 269–288. </li>
+                                <li>Morris GM, Lim-Wilby M. Molecular docking. Methods Mol Biol. 2008;443:365-82. doi:
+                                    10.1007/978-1-59745-177-2_19. </li>
+                                <li>Pantsar T, Poso A. Binding Affinity via Docking: Fact and Fiction. Molecules. 2018;
+                                    23(8):1899. https://doi.org/10.3390/molecules23081899</li>
+                            </ul>
+
+                        </div>
+
+                        <h3>El Algoritmo de AutoDock Vina</h3>
+
+                        <div class="vina-algorithm">
+                            <p>AutoDock Vina utiliza un sofisticado algoritmo de optimización que combina:</p>
+
+                            <div class="algorithm-workflow">
+                                <div class="workflow-step">
+                                    <h4>1. Optimización Global</h4>
+                                    <p>Utiliza una variante del algoritmo Iterated Local Search:</p>
+                                    <ul>
+                                        <li>Comienza con múltiples conformaciones aleatorias</li>
+                                        <li>Realiza optimización local en cada una</li>
+                                        <li>Selecciona las mejores conformaciones</li>
+                                        <li>Introduce perturbaciones para escapar de mínimos locales</li>
+                                        <li>Repite el proceso hasta la convergencia</li>
+                                    </ul>
+                                </div>
+
+                                <div class="workflow-step">
+                                    <h4>2. Optimización Local</h4>
+                                    <p>Utiliza el algoritmo Broyden-Fletcher-Goldfarb-Shanno (BFGS):</p>
+                                    <ul>
+                                        <li>Método de quasi-Newton que aproxima la matriz Hessiana</li>
+                                        <li>Converge rápidamente hacia mínimos locales</li>
+                                        <li>Eficiente para optimización en múltiples dimensiones</li>
+                                    </ul>
+                                </div>
+
+                                <div class="workflow-step">
+                                    <h4>3. Agrupamiento (Clustering)</h4>
+                                    <p>Agrupa poses similares para identificar modos de unión distintos:</p>
+                                    <ul>
+                                        <li>Usa RMSD como medida de similitud entre poses</li>
+                                        <li>Identifica representantes de cada grupo</li>
+                                        <li>Ordena por energía de unión</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Parámetro de Exhaustividad</h3>
+                            <p>El parámetro <strong>exhaustiveness</strong> en AutoDock Vina controla el número de
+                                ejecuciones independientes del algoritmo. Aumentar este valor mejora la probabilidad de
+                                encontrar el mínimo global, pero también incrementa el tiempo de cálculo. Para sistemas
+                                críticos, se recomienda usar valores entre 16-32 en lugar del valor predeterminado de 8.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="scoring" class="content-section">
+                        <h2>Funciones de Puntuación</h2>
+
+                        <p>Los programas de acoplamiento generalmente utilizan una función de puntuación, que puede
+                            interpretarse como un intento de aproximar los potenciales químicos estándar del sistema.
+                            Cuando se utilizan términos superficialmente basados en la física, como las interacciones de
+                            van der Waals y las energías de Coulomb, en la función de puntuación, es necesario aplicar
+                            una ponderación empírica significativa, en parte, para explicar esta diferencia entre
+                            energías y energías libres.</p>
+                        <p>Li, J., Fu, A. & Zhang, L. An Overview of Scoring Functions Used for Protein–Ligand
+                            Interactions in Molecular Docking. Interdiscip Sci Comput Life Sci 11, 320–328 (2019).
+                            https://doi.org/10.1007/s12539-019-00327</p>
+
+
+                        <div class="scoring-categories">
+                            <h3>Categorías Principales de Funciones de Puntuación</h3>
+
+                            <div class="illustration">
+                                <img src="{{ url_for('static', filename='images/score.png') }}"
+                                    alt="Logo de AutoDock Vina">
+                                <p class="caption">Adaptada de: Li, J., Fu, A. & Zhang, L. An Overview of Scoring
+                                    Functions Used for Protein–Ligand Interactions in Molecular Docking. Interdiscip Sci
+                                    Comput Life Sci 11, 320–328 (2019). https://doi.org/10.1007/s12539-019-00327</p>
+                            </div>
+
+                            <h3>La Función de Puntuación de AutoDock Vina</h3>
+
+                            <div class="vina-scoring">
+                                <p>AutoDock Vina utiliza una función de puntuación híbrida que combina conocimiento y
+                                    elementos empíricos:</p>
+
+                                <div class="equation-box">
+                                    <p>La función básica tiene la forma:</p>
+                                    <div class="equation">c = ∑<sub>i&lt;j</sub>
+                                        f<sub>t<sub>i</sub>t<sub>j</sub></sub>(r<sub>ij</sub>)</div>
+                                    <p>Donde la suma se realiza sobre todos los pares de átomos que pueden moverse con
+                                        respecto al otro, excluyendo pares de átomos separados por más de 8Å o por tres
+                                        enlaces covalentes.</p>
+                                </div>
+
+                                <p>Los términos de interacción incluyen:</p>
+                                <ul>
+                                    <li><strong>Términos estéricos:</strong> Repulsión y atracción de van der Waals</li>
+                                    <li><strong>Enlaces de hidrógeno:</strong> Ponderados por la direccionalidad</li>
+                                    <li><strong>Interacciones hidrofóbicas:</strong> Favorecen contactos entre átomos
+                                        hidrofóbicos</li>
+                                    <li><strong>Términos de desolvación:</strong> Representan el costo energético de
+                                        reemplazar interacciones soluto-solvente</li>
+                                    <li><strong>Penalización entrópica:</strong> Asociada con la restricción de
+                                        movimiento
+                                        de enlaces rotables</li>
+                                </ul>
+
+                                <div class="code-explanation">
+                                    <h4>Interpretación de Valores de Puntuación en Vina</h4>
+                                    <p>Los valores de energía de unión en AutoDock Vina se expresan en kcal/mol, donde
+                                        valores más negativos indican una unión más fuerte:</p>
+                                    <table class="energy-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rango (kcal/mol)</th>
+                                                <th>Interpretación aproximada</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>0 a -4.0</td>
+                                                <td>Unión débil o no significativa</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-4.0 a -6.0</td>
+                                                <td>Unión moderada</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-6.0 a -9.0</td>
+                                                <td>Unión fuerte</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Por debajo de -9.0</td>
+                                                <td>Unión muy fuerte (submicromolar)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <h3>Limitaciones de las Funciones de Puntuación</h3>
+
+                            <div class="scoring-limitations">
+                                <p>A pesar de los avances, las funciones de puntuación actuales tienen varias
+                                    limitaciones
+                                    importantes:</p>
+
+                                <div class="limitation-cards">
+                                    <div class="limitation-card">
+                                        <h4><i class="fas fa-tint"></i> Efectos del Solvente</h4>
+                                        <p>La mayoría de las funciones simplifican excesivamente el papel crucial del
+                                            agua,
+                                            tanto en la desolvación como en las interacciones mediadas por agua.</p>
+                                    </div>
+
+                                    <div class="limitation-card">
+                                        <h4><i class="fas fa-random"></i> Entropía</h4>
+                                        <p>Los cambios entrópicos complejos en el sistema ligando-receptor-solvente son
+                                            difíciles de cuantificar con precisión.</p>
+                                    </div>
+
+                                    <div class="limitation-card">
+                                        <h4><i class="fas fa-cog"></i> Flexibilidad del Receptor</h4>
+                                        <p>La mayoría de funciones no capturan adecuadamente los efectos energéticos de
+                                            la
+                                            adaptación conformacional del receptor.</p>
+                                    </div>
+
+                                    <div class="limitation-card">
+                                        <h4><i class="fas fa-balance-scale"></i> Polarización</h4>
+                                        <p>Los efectos de polarización mutua entre el ligando y el receptor rara vez se
+                                            incorporan correctamente.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="practical-tip">
+                                <h3><i class="fas fa-lightbulb"></i> Consejo Práctico</h3>
+                                <p>Debido a las limitaciones de las funciones de puntuación, es recomendable:</p>
+                                <ul>
+                                    <li>Usar múltiples funciones de puntuación y buscar consenso</li>
+                                    <li>Complementar el docking con simulaciones de dinámica molecular para evaluación
+                                        más
+                                        rigurosa</li>
+                                    <li>Considerar métodos de puntuación más avanzados como MM-GBSA o FEP para casos
+                                        críticos</li>
+                                    <li>Siempre validar las predicciones con datos experimentales cuando sea posible
+                                    </li>
+                                </ul>
+                            </div>
+                    </section>
+
+                    <section id="autodock" class="content-section">
+                        <h2>AutoDock Vina</h2>
+
+                        <div class="illustration">
+                            <img src="{{ url_for('static', filename='images/autodock_vina_logo.png') }}"
+                                alt="Logo de AutoDock Vina">
+                            <p class="caption">Fig. 7: AutoDock Vina es uno de los programas de docking más utilizados
+                                en investigación</p>
+                        </div>
+
+                        <p>AutoDock Vina es un programa de código abierto para realizar docking molecular, desarrollado
+                            por el laboratorio de Olson en The Scripps Research Institute. Representa una evolución
+                            significativa respecto a su predecesor AutoDock 4, con mejoras sustanciales en velocidad y
+                            precisión.</p>
+
+                        <h3>Características Principales</h3>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4>Ventajas</h4>
+                                <ul>
+                                    <li><strong>Rendimiento mejorado:</strong> Aproximadamente dos órdenes de magnitud
+                                        más rápido que AutoDock 4</li>
+                                    <li><strong>Mayor precisión:</strong> Implementa una función de puntuación híbrida
+                                        más sofisticada</li>
+                                    <li><strong>Paralelización:</strong> Aprovecha múltiples núcleos de CPU
+                                        automáticamente</li>
+                                    <li><strong>Simplicidad:</strong> Interfaz de línea de comandos intuitiva y menos
+                                        parámetros para ajustar</li>
+                                    <li><strong>Código abierto:</strong> Gratuito para uso académico y comercial</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Consideraciones</h4>
+                                <ul>
+                                    <li><strong>Flexibilidad receptora limitada:</strong> El receptor se trata
+                                        principalmente como rígido</li>
+                                    <li><strong>Formatos específicos:</strong> Requiere archivos en formato PDBQT</li>
+                                    <li><strong>Configuración manual:</strong> La caja de búsqueda debe definirse
+                                        explícitamente</li>
+                                    <li><strong>Dependencia de herramientas externas:</strong> A menudo requiere
+                                        MGLTools para la preparación</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Configuración y Uso</h3>
+
+                        <div class="code-sample">
+                            <h4>Ejemplo de Archivo de Configuración</h4>
+                            <pre><code># Configuración típica para AutoDock Vina
+                    receptor = receptor.pdbqt
+                    ligand = ligando.pdbqt
+                    out = resultado_docking.pdbqt
+                    
+                    # Centro de la caja de búsqueda
+                    center_x = 15.4
+                    center_y = 53.2
+                    center_z = 16.8
+                    
+                    # Dimensiones de la caja en Ångstroms
+                    size_x = 20.0
+                    size_y = 20.0
+                    size_z = 20.0
+                    
+                    # Parámetros de búsqueda
+                    exhaustiveness = 8
+                    num_modes = 9
+                    energy_range = 3</code></pre>
+                        </div>
+
+                        <div class="code-explanation">
+                            <h4>Parámetros clave</h4>
+                            <ul>
+                                <li><strong>center_x, center_y, center_z:</strong> Coordenadas del centro del sitio de
+                                    búsqueda (Å)</li>
+                                <li><strong>size_x, size_y, size_z:</strong> Dimensiones de la caja de búsqueda (Å)</li>
+                                <li><strong>exhaustiveness:</strong> Controla la exhaustividad de la búsqueda. Valores
+                                    mayores (8-32) dan resultados más confiables pero aumentan el tiempo de cálculo</li>
+                                <li><strong>num_modes:</strong> Número máximo de modos de unión (poses) a generar</li>
+                                <li><strong>energy_range:</strong> Rango de energía máximo entre el mejor y peor modo
+                                    (kcal/mol)</li>
+                            </ul>
+                        </div>
+
+                        <h3>Flujo de Trabajo con AutoDock Vina</h3>
+
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Preparación de Archivos</h4>
+                                    <p>Convertir estructuras a formato PDBQT:</p>
+                                    <pre><code># Preparar receptor
+                    pythonsh $MGL_ROOT/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -r receptor.pdb -o receptor.pdbqt
+                    
+                    # Preparar ligando
+                    pythonsh $MGL_ROOT/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_ligand4.py -l ligando.mol2 -o ligando.pdbqt</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Definición de la Caja de Búsqueda</h4>
+                                    <p>Determinar el sitio de unión y definir las dimensiones:</p>
+                                    <ul>
+                                        <li>Usar herramientas como AutoDockTools para visualizar y definir la caja</li>
+                                        <li>Alternativamente, calcular las coordenadas a partir de un ligando conocido
+                                        </li>
+                                        <li>Crear archivo de configuración con los parámetros de la caja</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Ejecución del Docking</h4>
+                                    <p>Ejecutar AutoDock Vina:</p>
+                                    <pre><code># Usando archivo de configuración
+                    vina --config config.txt
+                    
+                    # O especificando parámetros directamente
+                    vina --receptor receptor.pdbqt --ligand ligando.pdbqt --center_x 15.4 --center_y 53.2 --center_z 16.8 --size_x 20 --size_y 20 --size_z 20 --out resultados.pdbqt</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>Análisis de Resultados</h4>
+                                    <p>Examinar y analizar las poses generadas:</p>
+                                    <ul>
+                                        <li>Revisar el log para ver las energías de unión estimadas</li>
+                                        <li>Visualizar las poses con herramientas como PyMOL, VMD o Discovery Studio
+                                        </li>
+                                        <li>Extraer poses individuales si es necesario para análisis más detallado</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Comparación con Otros Programas de Docking</h3>
+
+                        <table class="energy-table">
+                            <thead>
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Ventajas</th>
+                                    <th>Desventajas</th>
+                                    <th>Mejor para</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AutoDock Vina</td>
+                                    <td>Rápido, preciso, código abierto, paralelizable</td>
+                                    <td>Receptor rígido, preparación manual</td>
+                                    <td>Uso general, cribado virtual a mediana escala</td>
+                                </tr>
+                                <tr>
+                                    <td>GOLD</td>
+                                    <td>Alta precisión, flexibilidad del receptor</td>
+                                    <td>Comercial, más lento</td>
+                                    <td>Estudios detallados con flexibilidad</td>
+                                </tr>
+                                <tr>
+                                    <td>Glide</td>
+                                    <td>Integración con suite Schrödinger, bien validado</td>
+                                    <td>Comercial, costoso</td>
+                                    <td>Proyectos farmacéuticos industriales</td>
+                                </tr>
+                                <tr>
+                                    <td>DOCK</td>
+                                    <td>Histórico, bien establecido</td>
+                                    <td>Menos intuitivo, curva de aprendizaje empinada</td>
+                                    <td>Entornos académicos, fragmentos</td>
+                                </tr>
+                                <tr>
+                                    <td>rDock</td>
+                                    <td>Código abierto, especializado en cavidades</td>
+                                    <td>Menos soporte, documentación limitada</td>
+                                    <td>Sitios de unión profundos o específicos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Consejo Práctico</h3>
+                            <p>Al usar AutoDock Vina, considera estas recomendaciones:</p>
+                            <ul>
+                                <li>Para estudios críticos, ejecuta múltiples repeticiones con diferentes semillas
+                                    aleatorias</li>
+                                <li>Aumenta el valor de <code>exhaustiveness</code> a 16 o más para sistemas complejos
+                                </li>
+                                <li>Usa una caja de búsqueda lo suficientemente grande para acomodar el ligando pero no
+                                    excesivamente amplia</li>
+                                <li>Valida tu protocolo mediante re-docking de ligandos conocidos cuando sea posible
+                                </li>
+                                <li>Considera una fase de refinamiento posterior al docking con dinámica molecular para
+                                    sistemas flexibles</li>
+                            </ul>
+                        </div>
+
+                        <p><strong>Referencias:</strong></p>
+                        <ul>
+                            <li>Kuntz, I.; Blaney, J.; Oatley, S.; Langridge, R.; Ferrin, T. Un enfoque geométrico para
+                                las interacciones macromolécula-ligando. J. Mol. Biol. 1982 , 161 , 269–288. </li>
+                            <li>Morris GM, Lim-Wilby M. Molecular docking. Methods Mol Biol. 2008;443:365-82. doi:
+                                10.1007/978-1-59745-177-2_19. </li>
+                            <li>Pantsar T, Poso A. Binding Affinity via Docking: Fact and Fiction. Molecules. 2018;
+                                23(8):1899. https://doi.org/10.3390/molecules23081899</li>
+                        </ul>
+                    </section>
+
+                    <!-- Sección Interpretación de Resultados -->
+                    <section id="interpretation" class="content-section">
+                        <h2>Interpretación de Resultados</h2>
+
+                        <p>La interpretación adecuada de los resultados de docking es crucial para extraer conclusiones
+                            significativas y guiar el diseño de fármacos o experimentos posteriores. Esta interpretación
+                            va más allá de simplemente mirar la puntuación energética.</p>
+
+                        <div class="illustration">
+                            <img src="{{ url_for('static', filename='images/docking_results.jpg') }}"
+                                alt="Resultados de docking molecular">
+                            <p class="caption">Fig. 8: Visualización e interpretación de resultados de docking
+                                molecular.
+                                Tomada de Shim H, Kim H, Allen JE, Wulff H. Pose Classification Using Three-Dimensional
+                                Atomic Structure-Based Neural Networks Applied to Ion Channel-Ligand Docking. J Chem Inf
+                                Model. 2022 May 23;62(10):2301-2315. doi: 10.1021/acs.jcim.1c01510.
+                            </p>
+                        </div>
+
+                        <h3>Análisis de la Puntuación</h3>
+
+                        <div class="interpretation-scoring">
+                            <p>Los valores de puntuación (scoring) proporcionan una estimación de la energía libre de
+                                unión, pero deben interpretarse con cautela:</p>
+
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Qué indican las puntuaciones</h4>
+                                    <ul>
+                                        <li>Valores más negativos sugieren unión más fuerte</li>
+                                        <li>Diferencias mayores a 2-3 kcal/mol suelen ser significativas</li>
+                                        <li>Rangos típicos para compuestos activos: -6 a -12 kcal/mol</li>
+                                        <li>Pueden usarse para clasificación relativa de compuestos</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Limitaciones importantes</h4>
+                                    <ul>
+                                        <li>No son equivalentes directos a valores experimentales (Ki, Kd)</li>
+                                        <li>Diferencias menores (±1 kcal/mol) suelen estar dentro del error</li>
+                                        <li>La correlación con actividad experimental varía según el sistema</li>
+                                        <li>Puede haber falsos positivos/negativos</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="energy-table">
+                                <h4>Interpretación aproximada de valores energéticos en AutoDock Vina</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Energía (kcal/mol)</th>
+                                            <th>Interpretación típica</th>
+                                            <th>Afinidad aproximada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>0 a -4.0</td>
+                                            <td>Unión débil o no significativa</td>
+                                            <td>mM o peor</td>
+                                        </tr>
+                                        <tr>
+                                            <td>-4.0 a -6.0</td>
+                                            <td>Unión moderada</td>
+                                            <td>µM alto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>-6.0 a -8.0</td>
+                                            <td>Unión buena</td>
+                                            <td>µM bajo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>-8.0 a -10.0</td>
+                                            <td>Unión muy buena</td>
+                                            <td>nM alto</td>
+                                        </tr>
+                                        <tr>
+                                            <td>-10.0 a -12.0</td>
+                                            <td>Unión excelente</td>
+                                            <td>nM bajo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Menor a -12.0</td>
+                                            <td>Unión excepcional</td>
+                                            <td>pM (verificar posibles artefactos)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="note">Nota: Estos valores son aproximados y dependen del sistema específico,
+                                    la función de puntuación y otros factores.</p>
+                            </div>
+                        </div>
+
+                        <h3>Análisis de las Poses</h3>
+
+                        <div class="pose-analysis">
+                            <p>La inspección visual de las poses es fundamental para una interpretación completa:</p>
+
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Aspectos a evaluar</h4>
+                                    <ul>
+                                        <li><strong>Agrupamiento de poses:</strong> Poses similares aumentan la
+                                            confianza</li>
+                                        <li><strong>Complementariedad:</strong> Ajuste espacial en el sitio de unión
+                                        </li>
+                                        <li><strong>Residuos clave:</strong> Interacciones con aminoácidos catalíticos o
+                                            conservados</li>
+                                        <li><strong>Satisfacción de farmacóforo:</strong> Alineamiento con
+                                            características esenciales</li>
+                                        <li><strong>Exposición al solvente:</strong> Grupos polares expuestos,
+                                            hidrofóbicos enterrados</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Señales de alerta</h4>
+                                    <ul>
+                                        <li><strong>Poses muy dispersas:</strong> Poca convergencia del algoritmo</li>
+                                        <li><strong>Tensión conformacional:</strong> Geometrías no naturales del ligando
+                                        </li>
+                                        <li><strong>Choques estéricos:</strong> Superposiciones no resueltas</li>
+                                        <li><strong>Grupos no satisfechos:</strong> Donantes/aceptores sin pareja</li>
+                                        <li><strong>Conformaciones improbables:</strong> Plegamientos extraños o
+                                            exposición desfavorable</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="code-sample">
+                                <h4>Extracto de resultados de AutoDock Vina:</h4>
+                                <pre><code>mode |   affinity | dist from best mode
+                         | (kcal/mol) | rmsd l.b.| rmsd u.b.
+                    -----+------------+----------+----------
+                       1        -8.7      0.000      0.000
+                       2        -8.5      1.642      2.714
+                       3        -8.3      1.705      2.561
+                       4        -8.1      1.758      4.256
+                       5        -7.8      2.570      5.899
+                       6        -7.6      2.392      4.956
+                       7        -7.3      2.601      4.389
+                       8        -7.0      2.527      4.646
+                       9        -6.9      4.162      7.758</code></pre>
+                            </div>
+
+                            <div class="code-explanation">
+                                <h4>Interpretación de la tabla de resultados:</h4>
+                                <ul>
+                                    <li><strong>Modo:</strong> Clasificación de las poses por energía</li>
+                                    <li><strong>Afinidad:</strong> Energía libre de unión estimada (kcal/mol)</li>
+                                    <li><strong>RMSD l.b. (lower bound):</strong> RMSD del mejor modo, considerando sólo
+                                        átomos equivalentes en la misma posición</li>
+                                    <li><strong>RMSD u.b. (upper bound):</strong> RMSD del mejor modo, tras la mejor
+                                        superposición posible</li>
+                                </ul>
+                                <p>Las poses con RMSD menor a 2Å generalmente se consideran como pertenecientes al mismo
+                                    modo de unión. En este ejemplo, el modo 1 es distinto de los modos 2-3, que parecen
+                                    formar un grupo.</p>
+                            </div>
+                        </div>
+
+                        <h3>Análisis de Interacciones</h3>
+
+                        <div class="interactions-analysis">
+                            <p>La identificación y cuantificación de interacciones específicas proporciona información
+                                valiosa sobre la naturaleza de la unión:</p>
+
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Interacciones a examinar</h4>
+                                    <ul>
+                                        <li><strong>Enlaces de hidrógeno:</strong> Distancia, ángulo, fortaleza relativa
+                                        </li>
+                                        <li><strong>Interacciones hidrofóbicas:</strong> Complementariedad con bolsillos
+                                            no polares</li>
+                                        <li><strong>Interacciones π-π:</strong> Apilamiento entre anillos aromáticos
+                                        </li>
+                                        <li><strong>Puentes salinos:</strong> Interacciones entre grupos cargados</li>
+                                        <li><strong>Enlaces halógeno:</strong> Interacciones direccionales de halógenos
+                                        </li>
+                                        <li><strong>Interacciones con metales:</strong> Coordinación con iones metálicos
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Herramientas para análisis</h4>
+                                    <ul>
+                                        <li><strong>Visualización:</strong> PyMOL, VMD, Chimera, Discovery Studio</li>
+                                        <li><strong>Análisis de interacciones:</strong> PLIP, LigPlot+, BINANA</li>
+                                        <li><strong>Mapeo de farmacóforos:</strong> LigandScout, Pharmit</li>
+                                        <li><strong>Mapas de interacción:</strong> SiMMap, FTMap</li>
+                                        <li><strong>Cálculos energéticos:</strong> MM-GBSA, FEP</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="illustration">
+                                <img src="{{ url_for('static', filename='images/interaction_diagram.png') }}"
+                                    alt="Diagrama de interacciones proteína-ligando">
+                                <p class="caption">Fig. 9: Diagrama de interacciones proteína-ligando mostrando enlaces
+                                    de hidrógeno, interacciones hidrofóbicas y π-stacking</p>
+                            </div>
+                        </div>
+
+                        <h3>Validación y Refinamiento</h3>
+
+                        <div class="validation-section">
+                            <p>Es crucial validar los resultados del docking y, cuando sea necesario, refinarlos para
+                                mejorar la confianza:</p>
+
+                            <div class="process-steps">
+                                <div class="process-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Validación con datos experimentales</h4>
+                                        <ul>
+                                            <li>Comparación con estructuras cristalográficas conocidas</li>
+                                            <li>Correlación con datos de SAR (relaciones estructura-actividad)</li>
+                                            <li>Consistencia con mutaciones que afectan la unión</li>
+                                            <li>Concordancia con datos de otros experimentos (STD-NMR, calorimetría,
+                                                etc.)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="process-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Refinamiento con métodos complementarios</h4>
+                                        <ul>
+                                            <li><strong>Dinámica molecular:</strong> Evaluar estabilidad de la pose y
+                                                efectos del solvente</li>
+                                            <li><strong>Métodos MM-GBSA/MM-PBSA:</strong> Estimaciones energéticas más
+                                                rigurosas</li>
+                                            <li><strong>Cálculos QM/MM:</strong> Para interacciones que implican efectos
+                                                electrónicos</li>
+                                            <li><strong>Métodos de energía libre:</strong> FEP, TI para valores
+                                                cuantitativos</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="process-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>Análisis comparativo</h4>
+                                        <ul>
+                                            <li>Comparación de resultados de diferentes programas de docking</li>
+                                            <li>Uso de diferentes funciones de puntuación</li>
+                                            <li>Evaluación con diferentes conformaciones del receptor</li>
+                                            <li>Análisis de sensitibilidad a parámetros del docking</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="process-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>Generación de hipótesis y predicciones</h4>
+                                        <ul>
+                                            <li>Identificación de modificaciones potenciales para mejorar la afinidad
+                                            </li>
+                                            <li>Predicción de efectos de mutaciones en residuos clave</li>
+                                            <li>Diseño de experimentos de validación</li>
+                                            <li>Desarrollo de modelos farmacofóricos basados en los resultados</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Consejos para Presentar Resultados</h3>
+                            <p>Al comunicar resultados de docking, considera estas buenas prácticas:</p>
+                            <ul>
+                                <li>Siempre incluye visualizaciones claras de las poses más relevantes</li>
+                                <li>Utiliza representaciones 2D de interacciones (diagramas tipo LigPlot) para mayor
+                                    claridad</li>
+                                <li>Proporciona información completa sobre los métodos y parámetros utilizados</li>
+                                <li>Presenta datos cuantitativos en tablas organizadas y comparativas</li>
+                                <li>Reconoce explícitamente las limitaciones del método</li>
+                                <li>Incluye validaciones experimentales cuando sea posible</li>
+                                <li>Destaca las implicaciones estructurales o funcionales más significativas</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-analysis">
+                            <h3>Ejemplo de Análisis de Resultados</h3>
+
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Caso: Inhibidor de proteasa HIV-1</h4>
+                                    <p>Análisis de un docking de indinavir en la proteasa del HIV-1:</p>
+                                    <ul>
+                                        <li><strong>Energía de unión:</strong> -10.2 kcal/mol, consistente con actividad
+                                            nM</li>
+                                        <li><strong>Convergencia:</strong> 8 de 10 poses dentro de 2Å RMSD</li>
+                                        <li><strong>Interacciones clave:</strong>
+                                            <ul>
+                                                <li>6 enlaces de hidrógeno con residuos Asp25, Gly27, Asp29</li>
+                                                <li>Fuerte interacción hidrofóbica con bolsillo S1</li>
+                                                <li>Grupo hidroxilo central orientado hacia Asp25 catalítico</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Validación:</strong> RMSD de 1.2Å respecto a estructura
+                                            cristalográfica</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Conclusiones e implicaciones</h4>
+                                    <ul>
+                                        <li>Alta confianza en la pose predicha debido a convergencia y validación
+                                            cristalográfica</li>
+                                        <li>Puntuación energética consistente con actividad experimental</li>
+                                        <li>Interacciones clave identificadas que explican selectividad</li>
+                                        <li>Oportunidades de optimización:
+                                            <ul>
+                                                <li>Extender grupo P2' para interactuar con bolsillo S2'</li>
+                                                <li>Mejorar solubilidad con sustituyentes polares en región expuesta
+                                                </li>
+                                                <li>Rigidificar estructura para reducir penalización entrópica</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="interactions" class="content-section">
+                        <h2>Interacciones Moleculares</h2>
+
+                        <p>Comprender las interacciones moleculares es fundamental para interpretar los resultados del
+                            docking. Estas interacciones determinan la especificidad y la afinidad de unión entre el
+                            ligando y su receptor.</p>
+
+                        <div class="interactions-overview">
+                            <img src="{{ url_for('static', filename='images/molecular_interactions.png') }}"
+                                alt="Tipos de interacciones moleculares">
+                            <p class="caption">Fig. 5: Principales tipos de interacciones moleculares en complejos
+                                proteína-ligando. Tomado de https://plip-tool.biotec.tu-dresden.de/plip-web/plip/index
+                            </p>
+                        </div>
+
+                        <h3>Tipos de Interacciones Proteína-Ligando</h3>
+
+                        <div class="interaction-types-container">
+                            <div class="interaction-type-card hydrogen-bond">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Enlaces de Hidrógeno</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 2-10 kcal/mol</p>
+                                    <p><strong>Distancia:</strong> 2.5-3.5 Å</p>
+                                    <p><strong>Características:</strong> Direccionales, cruciales para especificidad</p>
+                                    <p><strong>Participantes comunes:</strong>
+                                    <ul>
+                                        <li><strong>Donantes:</strong> -NH, -OH, -SH</li>
+                                        <li><strong>Aceptores:</strong> >C=O, -OH, -NH<sub>2</sub>, >N-, >S-</li>
+                                    </ul>
+                                    </p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>D--A criterios:
+- Distancia D-A ≤ 3.5Å
+- Ángulo D-H...A ≥ 120°
+- Ángulo H...A-X ≥ 90° (si A unido a X)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interaction-type-card hydrophobic">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Interacciones Hidrofóbicas</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 0.5-1.0 kcal/mol por par de átomos</p>
+                                    <p><strong>Distancia:</strong> 3.0-4.0 Å</p>
+                                    <p><strong>Características:</strong> No direccionales, aditivas, entrópicamente
+                                        favorables</p>
+                                    <p><strong>Participantes comunes:</strong> Cadenas alifáticas, grupos aromáticos,
+                                        átomos de carbono e hidrógeno no polares</p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>Criterios:
+- Distancia entre átomos de C ≤ 4.0Å
+- Átomos no implicados en otras interacciones
+- No más de 1.0Å de exposición al solvente</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interaction-type-card pi-stacking">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Interacciones π-π (Pi-stacking)</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 2-7 kcal/mol</p>
+                                    <p><strong>Distancia:</strong> 3.5-4.5 Å</p>
+                                    <p><strong>Características:</strong> Específicas entre sistemas aromáticos</p>
+                                    <p><strong>Tipos:</strong>
+                                    <ul>
+                                        <li><strong>Paralelo (face-to-face):</strong> Anillos paralelos, parcialmente
+                                            desplazados</li>
+                                        <li><strong>T-shaped (edge-to-face):</strong> Anillos perpendiculares</li>
+                                        <li><strong>Paralelo desplazado:</strong> Solapamiento parcial, más estable que
+                                            face-to-face</li>
+                                    </ul>
+                                    </p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>Criterios:
+- Distancia centroide-centroide ≤ 5.5Å
+- Ángulo entre planos < 30° (paralelo)
+- Ángulo entre planos > 60° (T-shaped)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interaction-type-card salt-bridge">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Puentes Salinos</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 3-10 kcal/mol</p>
+                                    <p><strong>Distancia:</strong> 2.8-4.0 Å</p>
+                                    <p><strong>Características:</strong> Fuertes, de largo alcance, sensibles al pH</p>
+                                    <p><strong>Participantes comunes:</strong>
+                                    <ul>
+                                        <li><strong>Grupos ácidos:</strong> -COO<sup>-</sup> (Asp, Glu)</li>
+                                        <li><strong>Grupos básicos:</strong> -NH<sub>3</sub><sup>+</sup> (Lys),
+                                            -Arg<sup>+</sup>, -His<sup>+</sup></li>
+                                    </ul>
+                                    </p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>Criterios:
+- Distancia centro-centro ≤ 5.5Å
+- Grupos con cargas opuestas
+- Grupos ionizables a pH fisiológico</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interaction-type-card halogen-bond">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Enlaces Halógeno</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 1-5 kcal/mol</p>
+                                    <p><strong>Distancia:</strong> 3.0-4.0 Å</p>
+                                    <p><strong>Características:</strong> Direccionales, similares a enlaces de hidrógeno
+                                    </p>
+                                    <p><strong>Participantes comunes:</strong>
+                                    <ul>
+                                        <li><strong>Donantes:</strong> C-F, C-Cl, C-Br, C-I</li>
+                                        <li><strong>Aceptores:</strong> O=C, N-, S-</li>
+                                    </ul>
+                                    </p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>Criterios:
+- Distancia X...Y ≤ 4.0Å (X=halógeno, Y=aceptor)
+- Ángulo C-X...Y entre 150° y 180°</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interaction-type-card metal-coordination">
+                                <div class="interaction-header">
+                                    <div class="interaction-icon"></div>
+                                    <h4>Coordinación de Metales</h4>
+                                </div>
+                                <div class="interaction-details">
+                                    <p><strong>Energía típica:</strong> 20-40 kcal/mol</p>
+                                    <p><strong>Distancia:</strong> 1.8-2.5 Å (dependiendo del metal)</p>
+                                    <p><strong>Características:</strong> Muy fuertes, direccionales, específicas</p>
+                                    <p><strong>Participantes comunes:</strong>
+                                    <ul>
+                                        <li><strong>Metales:</strong> Zn<sup>2+</sup>, Ca<sup>2+</sup>, Mg<sup>2+</sup>,
+                                            Fe<sup>2+</sup></li>
+                                        <li><strong>Ligandos:</strong> N, O, S de His, Cys, Asp, Glu, agua</li>
+                                    </ul>
+                                    </p>
+                                    <div class="interaction-example-code">
+                                        <p>Detección por PLIP:</p>
+                                        <pre><code>Criterios:
+- Distancia Metal-X ≤ 3.0Å
+- X debe tener par de electrones disponible</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Patrones de Interacción y Farmacóforos</h3>
+
+                        <div class="pharmacophore-section">
+                            <p>Los patrones de interacción pueden abstraerse en <strong>farmacóforos</strong>: el
+                                conjunto de características necesarias para la interacción óptima con un objetivo
+                                biológico específico.</p>
+
+                            <div class="pharmacophore-example">
+                                <img src="{{ url_for('static', filename='images/pharmacophore.png') }}"
+                                    alt="Ejemplo de modelo farmacofórico">
+                                <p class="caption">Fig. 6: Modelo farmacofórico extraído de interacciones
+                                    proteína-ligando. Tomado de: : Muchtaridi, M., Syahidah, H. N., Subarnas, A., Yusuf,
+                                    M., Bryant, S. D., & Langer, T. (2017). Molecular Docking and 3D-Pharmacophore
+                                    Modeling to Study the Interactions of Chalcone Derivatives with Estrogen Receptor
+                                    Alpha. Pharmaceuticals, 10(4), 81. https://doi.org/10.3390/ph10040081</p>
+                            </div>
+
+                            <p>Un modelo farmacofórico típico incluye:</p>
+                            <ul>
+                                <li><strong>Donantes de enlaces de hidrógeno</strong> (HBD)</li>
+                                <li><strong>Aceptores de enlaces de hidrógeno</strong> (HBA)</li>
+                                <li><strong>Centros hidrofóbicos</strong></li>
+                                <li><strong>Grupos aromáticos</strong></li>
+                                <li><strong>Cargas positivas/negativas</strong></li>
+                                <li><strong>Restricciones estéricas</strong></li>
+                            </ul>
+
+                            <p>Estos modelos son útiles para:</p>
+                            <ul>
+                                <li>Comprender los requisitos estructurales para la actividad</li>
+                                <li>Cribar virtualmente grandes bibliotecas de compuestos</li>
+                                <li>Optimizar estructuras de compuestos candidatos</li>
+                                <li>Identificar posibles reposicionamientos de fármacos</li>
+                            </ul>
+                        </div>
+
+                        <div class="hot-spot-section">
+                            <h3>Puntos Calientes (Hot Spots) de Unión</h3>
+
+                            <p>No todas las regiones del sitio de unión contribuyen igualmente a la afinidad. Los
+                                <strong>puntos calientes</strong> son regiones de alta contribución energética a la
+                                unión:
+                            </p>
+
+                            <div class="two-columns">
+                                <div>
+                                    <h4>Características de Hot Spots</h4>
+                                    <ul>
+                                        <li>Alta conservación evolutiva</li>
+                                        <li>Concentración de interacciones energéticamente favorables</li>
+                                        <li>A menudo incluyen residuos hidrofóbicos aromáticos (Trp, Tyr, Phe)</li>
+                                        <li>Baja exposición al solvente</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4>Identificación de Hot Spots</h4>
+                                    <ul>
+                                        <li>Mutagénesis experimental (alanine scanning)</li>
+                                        <li>Análisis de conservación de secuencia</li>
+                                        <li>Sondas de fragmentos (fragment probes)</li>
+                                        <li>Métodos computacionales (FTMap, SiteMap)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <p>Centrarse en los puntos calientes durante el diseño de fármacos puede mejorar
+                                significativamente la eficiencia del descubrimiento de inhibidores potentes y
+                                específicos.</p>
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Análisis de Interacciones</h3>
+                            <p>DayhoffDock utiliza la biblioteca PLIP (Protein-Ligand Interaction Profiler) para
+                                analizar automáticamente las interacciones en los complejos generados por docking. Las
+                                interacciones se clasifican, cuantifican y visualizan para facilitar la interpretación
+                                de los resultados. Para un análisis más profundo, recomendamos exportar los resultados y
+                                analizarlos con herramientas especializadas como PyMOL con el plugin PLIP, LigPlot+ o
+                                Maestro.</p>
+                        </div>
+                    </section>
+
+                    <section id="limitations" class="content-section">
+                        <h2>Limitaciones y Consideraciones</h2>
+
+                        <p>A pesar de su utilidad, el docking molecular tiene importantes limitaciones que deben tenerse
+                            en cuenta al interpretar los resultados.</p>
+
+                        <div class="limitations-grid">
+                            <div class="limitation-item">
+                                <h3><i class="fas fa-water"></i> Efectos del Solvente</h3>
+                                <p>La mayoría de los algoritmos de docking simplifican o ignoran:</p>
+                                <ul>
+                                    <li>Moléculas de agua estructurales que median interacciones</li>
+                                    <li>Efectos de desplazamiento de agua (contribución entrópica)</li>
+                                    <li>Cambios en la solvatación durante la unión</li>
+                                </ul>
+                                <div class="solution-box">
+                                    <h4>Posibles soluciones:</h4>
+                                    <ul>
+                                        <li>Incluir moléculas de agua conservadas en el sitio activo</li>
+                                        <li>Complementar con simulaciones de dinámica molecular con solvente explícito
+                                        </li>
+                                        <li>Utilizar métodos que incluyen solvatación implícita (MM-GBSA)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="limitation-item">
+                                <h3><i class="fas fa-sync-alt"></i> Flexibilidad Proteica</h3>
+                                <p>El docking convencional no captura adecuadamente:</p>
+                                <ul>
+                                    <li>Cambios conformacionales inducidos por la unión del ligando</li>
+                                    <li>Movimientos de loops y dominios enteros</li>
+                                    <li>Efectos alostéricos</li>
+                                </ul>
+                                <div class="solution-box">
+                                    <h4>Posibles soluciones:</h4>
+                                    <ul>
+                                        <li>Docking de conjunto (ensemble docking) con múltiples conformaciones</li>
+                                        <li>Docking con flexibilidad de cadenas laterales</li>
+                                        <li>Métodos de docking inducido (induced-fit docking)</li>
+                                        <li>Simulaciones de dinámica molecular previas al docking</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="limitation-item">
+                                <h3><i class="fas fa-balance-scale"></i> Precisión Energética</h3>
+                                <p>Las funciones de puntuación tienen limitaciones:</p>
+                                <ul>
+                                    <li>Aproximaciones en términos energéticos</li>
+                                    <li>Dificultad para capturar contribuciones entrópicas</li>
+                                    <li>Correlación limitada con afinidades experimentales</li>
+                                </ul>
+                                <div class="solution-box">
+                                    <h4>Posibles soluciones:</h4>
+                                    <ul>
+                                        <li>Usar múltiples funciones de puntuación</li>
+                                        <li>Aplicar métodos de rescoring más rigurosos (MM-GBSA, FEP)</li>
+                                        <li>Calibración específica para el sistema estudiado</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="limitation-item">
+                                <h3><i class="fas fa-atom"></i> Efectos Cuánticos</h3>
+                                <p>Los algoritmos de docking generalmente ignoran:</p>
+                                <ul>
+                                    <li>Transferencia de carga</li>
+                                    <li>Polarización mutua</li>
+                                    <li>Formación/ruptura de enlaces</li>
+                                </ul>
+                                <div class="solution-box">
+                                    <h4>Posibles soluciones:</h4>
+                                    <ul>
+                                        <li>Métodos híbridos QM/MM para regiones críticas</li>
+                                        <li>Parametrización específica para sistemas particulares</li>
+                                        <li>Cálculos QM posteriores en los complejos generados</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="best-practices">
+                            <h3>Mejores Prácticas para Resultados Confiables</h3>
+
+                            <div class="practice-item">
+                                <div class="practice-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="practice-content">
+                                    <h4>Validación Cruzada</h4>
+                                    <p>Siempre valide el protocolo de docking utilizando:</p>
+                                    <ul>
+                                        <li><strong>Re-docking:</strong> Redockear ligandos cristalográficos conocidos
+                                            (RMSD &lt; 2Å)</li>
+                                        <li><strong>Cross-docking:</strong> Probar ligandos conocidos en diferentes
+                                            estructuras del receptor</li>
+                                        <li><strong>Validación prospectiva:</strong> Predecir y luego confirmar
+                                            experimentalmente</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="practice-item">
+                                <div class="practice-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="practice-content">
+                                    <h4>Preparación Cuidadosa</h4>
+                                    <p>La calidad de los resultados depende críticamente de:</p>
+                                    <ul>
+                                        <li>Selección adecuada de la estructura del receptor (alta resolución)</li>
+                                        <li>Asignación correcta de estados de protonación y cargas</li>
+                                        <li>Identificación apropiada del sitio de unión</li>
+                                        <li>Verificación de la estructura química del ligando</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="practice-item">
+                                <div class="practice-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="practice-content">
+                                    <h4>Análisis Crítico</h4>
+                                    <p>Evalúe los resultados más allá de las puntuaciones:</p>
+                                    <ul>
+                                        <li>Inspección visual de las poses</li>
+                                        <li>Comparación con datos de estructura-actividad conocidos</li>
+                                        <li>Consistencia de los modos de unión</li>
+                                        <li>Interacciones con residuos clave</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="practice-item">
+                                <div class="practice-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="practice-content">
+                                    <h4>Métodos Complementarios</h4>
+                                    <p>Complemente el docking con:</p>
+                                    <ul>
+                                        <li>Simulaciones de dinámica molecular</li>
+                                        <li>Métodos de energía libre más rigurosos</li>
+                                        <li>Cribado basado en farmacóforos</li>
+                                        <li>Validación experimental cuando sea posible</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Consejo de Interpretación</h3>
+                            <p>Los resultados de docking deben considerarse como hipótesis, no como hechos definitivos.
+                                La clasificación de compuestos basada únicamente en puntuaciones de docking debe tomarse
+                                con cautela - diferencias menores (1-2 kcal/mol) no son significativas dado el error
+                                inherente de las funciones de puntuación. Siempre interprete los resultados en el
+                                contexto del conocimiento biológico y estructural disponible.</p>
+                        </div>
+
+                        <p><strong>Referencias:</strong></p>
+                        <ul>
+                            <li>Saikia S, Bordoloi M. Molecular Docking: Challenges, Advances and its Use in Drug
+                                Discovery Perspective. Curr Drug Targets. 2019;20(5):501-521. doi:
+                                10.2174/1389450119666181022153016.</li>
+                        </ul>
+
+                    </section>
+
+                    <section id="applications" class="content-section">
+                        <h2>Aplicaciones en Investigación</h2>
+
+                        <p>El docking molecular tiene numerosas aplicaciones en investigación biomédica, química y
+                            farmacéutica.</p>
+
+                        <div class="applications-grid">
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-pills"></i></div>
+                                <h3>Descubrimiento de Fármacos</h3>
+                                <ul>
+                                    <li>Cribado virtual de grandes bibliotecas de compuestos</li>
+                                    <li>Optimización de hits para mejorar potencia y selectividad</li>
+                                    <li>Análisis de relaciones estructura-actividad</li>
+                                    <li>Reposicionamiento de fármacos existentes</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>El fármaco Imatinib (Gleevec) para la leucemia mieloide crónica se desarrolló
+                                        utilizando técnicas de modelado molecular, incluyendo docking, para optimizar su
+                                        unión a la tirosina quinasa BCR-ABL.</p>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-dna"></i></div>
+                                <h3>Biología Estructural</h3>
+                                <ul>
+                                    <li>Predicción de modos de unión</li>
+                                    <li>Generación de hipótesis para estudios de mutagénesis</li>
+                                    <li>Interpretación de datos experimentales</li>
+                                    <li>Estudio de selectividad entre proteínas homólogas</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>El análisis por docking molecular ayudó a explicar la selectividad de inhibidores
+                                        de quinasas de tercera generación, guiando el diseño de compuestos que superan
+                                        los mecanismos de resistencia en el tratamiento del cáncer.</p>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-radiation"></i></div>
+                                <h3>Toxicología Computacional</h3>
+                                <ul>
+                                    <li>Predicción de interacciones con dianas no deseadas</li>
+                                    <li>Evaluación de interacciones con receptores nucleares</li>
+                                    <li>Identificación de potenciales efectos secundarios</li>
+                                    <li>Análisis de toxicidad relacionada con metabolismo</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>El cribado virtual basado en docking ha permitido identificar compuestos que
+                                        podrían interactuar con el receptor de hidrocarburos arílicos (AhR),
+                                        proporcionando indicios tempranos de toxicidad potencial antes de ensayos in
+                                        vitro.</p>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-microscope"></i></div>
+                                <h3>Medicina Personalizada</h3>
+                                <ul>
+                                    <li>Análisis de mutaciones específicas de pacientes</li>
+                                    <li>Predicción de resistencia a fármacos</li>
+                                    <li>Selección de terapias dirigidas</li>
+                                    <li>Optimización de dosificación</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>Estudios de docking con variantes mutadas del EGFR han permitido predecir qué
+                                        pacientes con cáncer de pulmón responderán a inhibidores específicos, guiando
+                                        decisiones terapéuticas basadas en el perfil genético individual.</p>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-virus"></i></div>
+                                <h3>Enfermedades Infecciosas</h3>
+                                <ul>
+                                    <li>Identificación de inhibidores de enzimas virales</li>
+                                    <li>Diseño de antibióticos contra dianas bacterianas</li>
+                                    <li>Análisis de resistencia a antimicrobianos</li>
+                                    <li>Respuesta rápida a patógenos emergentes</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>Durante la pandemia de COVID-19, el docking molecular aceleró la identificación
+                                        de potenciales fármacos contra la proteasa principal del SARS-CoV-2, permitiendo
+                                        reposicionar medicamentos existentes como candidatos para ensayos clínicos.</p>
+                                </div>
+                            </div>
+
+                            <div class="application-card">
+                                <div class="application-icon"><i class="fas fa-leaf"></i></div>
+                                <h3>Productos Naturales</h3>
+                                <ul>
+                                    <li>Evaluación del potencial terapéutico de compuestos naturales</li>
+                                    <li>Identificación de principios activos en medicina tradicional</li>
+                                    <li>Optimización de compuestos derivados de plantas</li>
+                                    <li>Descubrimiento de nuevos scaffolds moleculares</li>
+                                </ul>
+                                <div class="case-study">
+                                    <h4>Caso de éxito:</h4>
+                                    <p>El estudio por docking de fitoquímicos del té verde permitió identificar y
+                                        optimizar compuestos con actividad anticancerígena, llevando al desarrollo de
+                                        derivados semisintéticos más potentes que los productos naturales originales.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Tendencias Emergentes</h3>
+
+                        <div class="trends-container">
+                            <div class="trend-item">
+                                <h4><i class="fas fa-brain"></i> Inteligencia Artificial en Docking</h4>
+                                <p>La IA está transformando el docking molecular:</p>
+                                <ul>
+                                    <li>Funciones de puntuación basadas en deep learning</li>
+                                    <li>Generación de poses guiada por IA</li>
+                                    <li>Predicción de efectos de mutaciones</li>
+                                    <li>Optimización de parámetros específicos para sistemas</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-item">
+                                <h4><i class="fas fa-project-diagram"></i> Docking Proteína-Proteína</h4>
+                                <p>Avances en modelado de interacciones entre proteínas:</p>
+                                <ul>
+                                    <li>Inhibidores de interacciones proteína-proteína</li>
+                                    <li>Diseño de biológicos y anticuerpos</li>
+                                    <li>Modelado de complejos multiproteicos</li>
+                                    <li>Interpretación de redes de interacción</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-item">
+                                <h4><i class="fas fa-cloud-upload-alt"></i> Computación en la Nube y HPC</h4>
+                                <p>Acceso a recursos computacionales avanzados:</p>
+                                <ul>
+                                    <li>Cribado virtual a escala masiva</li>
+                                    <li>Docking en tiempo real</li>
+                                    <li>Integración con pipelines de descubrimiento automatizados</li>
+                                    <li>Accesibilidad para instituciones más pequeñas</li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-item">
+                                <h4><i class="fas fa-vr-cardboard"></i> Realidad Virtual/Aumentada</h4>
+                                <p>Nuevas formas de visualizar e interactuar:</p>
+                                <ul>
+                                    <li>Exploración interactiva de resultados de docking</li>
+                                    <li>Manipulación manual de poses en 3D</li>
+                                    <li>Colaboración en tiempo real entre investigadores</li>
+                                    <li>Herramientas educativas inmersivas</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="practical-tip">
+                            <h3><i class="fas fa-lightbulb"></i> Aplicaciones Educativas</h3>
+                            <p>DayhoffDock está diseñado como una herramienta educativa para comprender los principios
+                                del docking molecular. Los estudiantes e investigadores pueden:</p>
+                            <ul>
+                                <li>Experimentar con diferentes proteínas y ligandos</li>
+                                <li>Visualizar interactivamente los resultados</li>
+                                <li>Comparar diferentes configuraciones y parámetros</li>
+                                <li>Desarrollar una intuición para la interpretación de resultados</li>
+                            </ul>
+                            <p>Para aplicaciones de investigación seria, recomendamos complementar DayhoffDock con
+                                herramientas más especializadas como AutoDock Vina original, GOLD, Glide o MOE.</p>
+                        </div>
+
+                        <p><strong>Referencias:</strong></p>
+                        <ul>
+                            <li>Paggi JM, Pandit A, Dror RO. The Art and Science of Molecular Docking. Annu Rev Biochem. 2024 Aug;93(1):389-410. doi: 10.1146/annurev-biochem-030222-120000.</li>
+                        </ul>
+                    </section>
+
+                    <section id="glossary" class="content-section">
+                        <h2>Glosario de Términos</h2>
+
+                        <div class="glossary-container">
+                            <div class="glossary-item">
+                                <h3>Afinidad de Unión</h3>
+                                <p>Fuerza de la interacción entre un ligando y su receptor, típicamente expresada como
+                                    constante de disociación (Kd), constante de inhibición (Ki) o energía libre de unión
+                                    (ΔG).</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>AutoDock Vina</h3>
+                                <p>Programa de código abierto para docking molecular desarrollado por The Scripps
+                                    Research Institute. Sucesor de AutoDock, con mejor precisión y rendimiento.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Caja de Grid</h3>
+                                <p>Región tridimensional que define el espacio de búsqueda para el docking, generalmente
+                                    centrada en el sitio activo o sitio de unión conocido.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Confórmero</h3>
+                                <p>Estructura tridimensional específica de una molécula que resulta de rotaciones
+                                    alrededor de enlaces simples. Un ligando puede adoptar múltiples conformaciones.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Cribado Virtual</h3>
+                                <p>Técnica computacional para evaluar grandes bibliotecas de compuestos y seleccionar
+                                    los candidatos más prometedores para pruebas experimentales.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Docking Flexible</h3>
+                                <p>Método de docking que permite cambios conformacionales en el ligando y/o el receptor
+                                    durante el proceso de acoplamiento.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Docking Rígido</h3>
+                                <p>Método simplificado de docking que trata tanto al ligando como al receptor como
+                                    cuerpos rígidos sin flexibilidad conformacional.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Energía de Unión</h3>
+                                <p>Estimación computacional de la afinidad entre ligando y receptor, generalmente
+                                    expresada en kcal/mol. Valores más negativos indican unión más fuerte.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Farmacóforo</h3>
+                                <p>Conjunto de características estéricas y electrónicas necesarias para asegurar
+                                    interacciones óptimas con una diana biológica específica y desencadenar o bloquear
+                                    su respuesta biológica.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Función de Puntuación</h3>
+                                <p>Algoritmo matemático que estima la afinidad de unión entre el ligando y el receptor
+                                    basado en diversos términos energéticos.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Ligando</h3>
+                                <p>Molécula pequeña que se une a una macromolécula (típicamente una proteína) para
+                                    formar un complejo. En el contexto del descubrimiento de fármacos, suele ser el
+                                    compuesto candidato.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>MGLTools</h3>
+                                <p>Conjunto de herramientas para visualización y análisis molecular que incluye
+                                    AutoDockTools, utilizado para preparar archivos de entrada para AutoDock y Vina.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Minimización de Energía</h3>
+                                <p>Proceso computacional que ajusta las coordenadas atómicas para encontrar una
+                                    conformación de menor energía, eliminando tensiones o choques estéricos.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Modo de Unión</h3>
+                                <p>Orientación específica y conformación que adopta un ligando cuando se une a su
+                                    receptor. Una molécula puede tener múltiples modos de unión potenciales.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>PDBQT</h3>
+                                <p>Formato de archivo utilizado por AutoDock/Vina que contiene coordenadas atómicas
+                                    (similar a PDB) con información adicional sobre cargas (Q) y tipos de átomos (T).
+                                </p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Pose</h3>
+                                <p>Posición y orientación específicas de un ligando en el sitio de unión del receptor,
+                                    generada por el algoritmo de docking.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Receptor</h3>
+                                <p>Macromolécula biológica (generalmente una proteína) a la que se une el ligando. El
+                                    objetivo del docking es predecir cómo el ligando interactúa con el receptor.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Redocking</h3>
+                                <p>Validación del método de docking mediante el redockeo de un ligando conocido en su
+                                    sitio de unión cristalográfico, evaluado por la desviación (RMSD) de la pose
+                                    predicha respecto a la experimental.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>RMSD</h3>
+                                <p>Root-Mean-Square Deviation. Medida de la diferencia promedio entre las posiciones de
+                                    átomos en dos estructuras superpuestas, utilizada para evaluar la similitud entre
+                                    poses de ligandos.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Sitio Activo</h3>
+                                <p>Región específica de una proteína donde ocurre la actividad catalítica (en enzimas) o
+                                    donde se unen moléculas reguladoras. Objetivo principal para el docking de
+                                    inhibidores.</p>
+                            </div>
+
+                            <div class="glossary-item">
+                                <h3>Sitio Alostérico</h3>
+                                <p>Sitio de unión distinto del sitio activo, donde la unión de un ligando puede modular
+                                    la función de la proteína a distancia mediante cambios conformacionales.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 DayhoffDock. Todos los derechos reservados.</p>
+            <div class="developers-footer">
+                Desarrollado por Johan Granados • Andrés Pereañez • Lina Preciado
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/education.js') }}"></script>
+</body>
+
+</html>

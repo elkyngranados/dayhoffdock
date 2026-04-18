@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayhoffDock - Tutoriales de Docking Molecular</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/education.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tutorials.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-atom"></i> DayhoffDock: Tutoriales de Docking</h1>
+            <p>Aprende a utilizar el docking molecular paso a paso</p>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url_for('education') }}" class="nav-link"><i class="fas fa-book"></i> Guía Educativa</a>
+                <a href="{{ url_for('tutorials') }}" class="nav-link active"><i class="fas fa-graduation-cap"></i>
+                    Tutoriales</a>
+            </div>
+        </header>
+
+        <main class="tutorials-main">
+            <div class="tutorials-intro">
+                <h2>Aprende Docking Molecular Con Ejemplos Prácticos</h2>
+                <p>Esta sección te guiará a través de tutoriales paso a paso para comprender el proceso de docking
+                    molecular utilizando ejemplos reales.</p>
+                <p>Cada tutorial incluye todos los archivos necesarios, explicaciones detalladas y visualizaciones
+                    interactivas para ayudarte a entender los conceptos clave.</p>
+            </div>
+
+            <div class="tutorials-container">
+                <!-- Tutorial 1: Básico -->
+                <div class="tutorial-card">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon"><i class="fas fa-seedling"></i></div>
+                        <div class="tutorial-level beginner">Tutorial 1</div>
+                    </div>
+                    <h3>Introducción al Docking</h3>
+                    <p>Aprende los fundamentos del docking molecular con un ejemplo simple de inhibidor-enzima.</p>
+                    <ul class="tutorial-features">
+                        <li><i class="fas fa-clock"></i> Duración: 37 minutos</li>
+                        <li><i class="fas fa-puzzle-piece"></i> Requisitos: Ninguno</li>
+                    </ul>
+                    <div class="tutorial-covers">
+                        <h4>Este tutorial cubre:</h4>
+                        <ul>
+                            <li>Fundamentos básicos de docking</li>
+                            <li>Tipos de docking</li>
+                        </ul>
+                    </div>
+                    <a href="https://youtu.be/l40jA5PuKIs" class="tutorial-btn">Comenzar Tutorial</a>
+                </div>
+
+                <!-- Tutorial 2: Intermedio -->
+                <div class="tutorial-card">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon"><i class="fas fa-flask"></i></div>
+                        <div class="tutorial-level intermediate">Tutorial 2</div>
+                    </div>
+                    <h3>Tutorial 2: Preparación, ejecución y análisis de docking</h3>
+                    <p>Aprende el flujo completo: prepara receptor y ligando, configura y ejecuta el docking, y analiza
+                        los resultados.</p>
+                    <ul class="tutorial-features">
+                        <li><i class="fas fa-clock"></i> Duración: 30 minutos</li>
+                        <li><i class="fas fa-puzzle-piece"></i> Requisitos: Tutorial Básico</li>
+                    </ul>
+                    <div class="tutorial-covers">
+                        <h4>Este tutorial cubre:</h4>
+                        <ul>
+                            <li>Preparación de la estructura del receptor y del ligando</li>
+                            <li>Configuración y ejecución del docking</li>
+                            <li>Análisis de resultados</li>
+                        </ul>
+                    </div>
+                    <a href="https://youtu.be/v5Kqfshrir8" class="tutorial-btn">Comenzar Tutorial</a>
+                </div>
+
+            </div>
+
+            <div class="example-section">
+                <h2>Ejemplos Prácticos Preconfigurados</h2>
+                <p>Prueba estos ejemplos reales de problemas de docking molecular directamente en DayhoffDock:</p>
+
+                <div class="example-cards">
+                    <div class="example-card protease-card">
+                        <div class="example-content">
+                            <h3>Proteasa SARS-CoV-2</h3>
+                            <p>Docking de inhibidores en la proteasa principal (Mpro) del SARS-CoV-2, enzima clave para
+                                la replicación viral y diana terapéutica principal para el desarrollo de antivirales
+                                contra COVID-19.</p>
+                            <div class="example-meta">
+                                <span><i class="fas fa-virus"></i> Receptor: SARS-CoV-2 Main Protease</span>
+                                <span><i class="fas fa-flask"></i> Ligando: Danoprevir</span>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1uLafzrhX5lptFYkrSasTEI0QL5Au0CMi?usp=sharing"
+                                target="_blank" class="example-btn">
+                                <i class="fas fa-download"></i> Descargar Ejemplo
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="example-card fosfolipasa-card">
+                        <div class="example-content">
+                            <h3>Fosfolipasa A₂ de <i>B. asper</i></h3>
+                            <p>Docking de inhibidores en la fosfolipasa A₂ de <i>Bothrops asper</i>, enzima responsable
+                                de los
+                                efectos inflamatorios y necróticos del veneno de esta serpiente venenosa.
+                            </p>
+                            <div class="example-meta">
+                                <span><i class="fas fa-dna"></i> Receptor: PLA₂ <i>B. asper</i></span>
+                                <span><i class="fas fa-shield-alt"></i> Ligando: Varespladib</span>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1epxcuzfm8qW2E2_0HHn4p2pgNIRZtl41?usp=sharing"
+                                target="_blank" class="example-btn">
+                                <i class="fas fa-download"></i> Descargar Ejemplo
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="example-card tirosinasa-card">
+                        <div class="example-content">
+                            <h3>Tirosinasa de <i>A. bisporus</i></h3>
+                            <p>Docking de inhibidores en la tirosinasa de <i>Agaricus bisporus</i> (champiñón común),
+                                enzima
+                                clave en la biosíntesis de melanina y diana importante en cosmética y medicina
+                                dermatológica.</p>
+                            <div class="example-meta">
+                                <span><i class="fas fa-seedling"></i> Receptor: Tirosinasa <i>A. bisporus</i></span>
+                                <span><i class="fas fa-palette"></i> Ligando: Hesperetin</span>
+                            </div>
+                            <a href="https://drive.google.com/drive/folders/1ZEVzT81lYCnYr5cejVzxASS0Fj6rv2ON?usp=sharing"
+                                target="_blank" class="example-btn">
+                                <i class="fas fa-download"></i> Descargar Ejemplo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-reference">
+                <h2>Referencia Rápida</h2>
+
+                <div class="reference-tables">
+                    <div class="reference-table">
+                        <h3>Parámetros Comunes de Docking</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parámetro</th>
+                                    <th>Descripción</th>
+                                    <th>Valor Típico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>center_x, center_y, center_z</td>
+                                    <td>Coordenadas del centro de la caja de búsqueda</td>
+                                    <td>Depende del sitio activo</td>
+                                </tr>
+                                <tr>
+                                    <td>size_x, size_y, size_z</td>
+                                    <td>Dimensiones de la caja de búsqueda en Å</td>
+                                    <td>20-30Å</td>
+                                </tr>
+                                <tr>
+                                    <td>exhaustiveness</td>
+                                    <td>Controla la exhaustividad de la búsqueda</td>
+                                    <td>8 (básico), 16-32 (avanzado)</td>
+                                </tr>
+                                <tr>
+                                    <td>num_modes</td>
+                                    <td>Número de poses a generar</td>
+                                    <td>9-20</td>
+                                </tr>
+                                <tr>
+                                    <td>energy_range</td>
+                                    <td>Ventana de energía para reportar resultados</td>
+                                    <td>3-4 kcal/mol</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="reference-table">
+                        <h3>Valores Típicos de Energía de Unión</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Energía (kcal/mol)</th>
+                                    <th>Interpretación</th>
+                                    <th>Afinidad Aproximada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0 a -4.0</td>
+                                    <td>Unión débil</td>
+                                    <td>mM</td>
+                                </tr>
+                                <tr>
+                                    <td>-4.0 a -6.0</td>
+                                    <td>Unión moderada</td>
+                                    <td>μM alto</td>
+                                </tr>
+                                <tr>
+                                    <td>-6.0 a -8.0</td>
+                                    <td>Unión buena</td>
+                                    <td>μM bajo</td>
+                                </tr>
+                                <tr>
+                                    <td>-8.0 a -10.0</td>
+                                    <td>Unión muy buena</td>
+                                    <td>nM alto</td>
+                                </tr>
+                                <tr>
+                                    <td>Menor a -10.0</td>
+                                    <td>Unión excelente</td>
+                                    <td>nM bajo a pM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 DayhoffDock. Todos los derechos reservados.</p>
+            <div class="developers-footer">
+                Desarrollado por Johan Granados • Andrés Pereañez • Lina Preciado
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Función para cargar ejemplos predefinidos
+        function loadExample(exampleName) {
+            fetch(`/examples/${exampleName}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Guardar la configuración en sessionStorage
+                    sessionStorage.setItem('dockingExample', JSON.stringify(data));
+
+                    // Redirigir a la página principal con parámetro para cargar el ejemplo
+                    window.location.href = `${window.location.origin}/?example=${exampleName}`;
+                })
+                .catch(error => {
+                    console.error('Error cargando el ejemplo:', error);
+                    alert('Error al cargar el ejemplo. Por favor intenta de nuevo.');
+                });
+        }
+    </script>
+</body>
+
+</html>

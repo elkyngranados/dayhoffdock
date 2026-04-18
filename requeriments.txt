@@ -1,0 +1,17 @@
+
+Flask
+Werkzeug
+rdkit
+pandas
+numpy
+python-dotenv
+gunicorn
+pytest
+black
+flake8
+itsdangerous
+click
+python-dateutil
+loguru
+rdkit-pypi
+pillow

@@ -1,0 +1,408 @@
+/* Estilos para la sección de tutoriales */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #9b59b6;
+    --warning-color: #f39c12;
+    --error-color: #e74c3c;
+    --beginner-color: #2ecc71;
+    --intermediate-color: #f39c12;
+    --advanced-color: #e74c3c;
+    --light-blue: #ebf5fb;
+    --light-green: #e8f8f5;
+    --light-yellow: #fef9e7;
+    --light-red: #fdedec;
+    --text-color: #2c3e50;
+    --light-text: #7f8c8d;
+    --border-color: #e1e8ed;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+/* Estilos para la estructura de tutoriales */
+.tutorials-main {
+    padding: 1rem 0;
+}
+
+.tutorials-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tutorials-intro h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.tutorials-intro p {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Tarjetas de tutorial */
+.tutorials-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.tutorial-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+}
+
+.tutorial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tutorial-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.tutorial-level {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tutorial-level.beginner {
+    background-color: var(--light-green);
+    color: var(--beginner-color);
+}
+
+.tutorial-level.intermediate {
+    background-color: var(--light-yellow);
+    color: var(--intermediate-color);
+}
+
+.tutorial-level.advanced {
+    background-color: var(--light-red);
+    color: var(--advanced-color);
+}
+
+.tutorial-card h3 {
+    margin: 0 0 0.8rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.tutorial-card p {
+    margin: 0 0 1.2rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.tutorial-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tutorial-features li {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.tutorial-covers {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.tutorial-covers h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.tutorial-covers ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.tutorial-covers li {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.tutorial-btn {
+    margin-top: auto;
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tutorial-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Sección de ejemplos */
+.example-section {
+    margin-bottom: 3rem;
+}
+
+.example-section h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.example-section > p {
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.example-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.example-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.example-card:hover {
+    transform: translateY(-5px);
+}
+
+.example-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.example-content {
+    padding: 1.5rem;
+}
+
+.example-content h3 {
+    margin: 0 0 0.8rem;
+    color: var(--text-color);
+    font-size: 1.3rem;
+}
+
+.example-content p {
+    margin: 0 0 1.2rem;
+    line-height: 1.5;
+}
+
+.example-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.example-meta span {
+    font-size: 0.9rem;
+    color: var(--light-text);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.example-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.example-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+/* Referencia rápida */
+.quick-reference {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.quick-reference h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.reference-tables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.reference-table h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.reference-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reference-table th, .reference-table td {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.reference-table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+}
+
+.reference-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Comandos de cheatsheet */
+.cheatsheet {
+    margin-bottom: 2rem;
+}
+
+.cheatsheet h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.command-box {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.command-box h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.command-box pre {
+    margin: 0;
+    overflow-x: auto;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+}
+
+.reference-download {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.reference-download p {
+    margin-bottom: 1rem;
+}
+
+.download-ref-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.download-ref-btn:hover {
+    background-color: #8e44ad;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tutorials-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .example-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .reference-tables {
+        grid-template-columns: 1fr;
+    }
+    
+    .reference-table {
+        overflow-x: auto;
+    }
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}

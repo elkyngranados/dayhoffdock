@@ -1,0 +1,598 @@
+/* Header de interacciones */
+.interactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.interactions-header h4 {
+    margin: 0;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.export-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.export-btn:hover {
+    background: #27ae60;
+}
+
+/* Items de interacción */
+.interaction-item {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.interaction-item:hover {
+    background: #f0f4f8;
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.interaction-item.highlighted {
+    background: #e8f4fd;
+    border-left-color: var(--warning-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+}
+
+/* Colores específicos por tipo de interacción */
+.interaction-item.h-bond {
+    border-left-color: #3498db;
+}
+
+.interaction-item.hydrophobic {
+    border-left-color: #f39c12;
+}
+
+.interaction-item.salt-bridge {
+    border-left-color: #e74c3c;
+}
+
+.interaction-item.pi-stacking {
+    border-left-color: #9b59b6;
+}
+
+.interaction-item.halogen-bond {
+    border-left-color: #1abc9c;
+}
+
+.interaction-item.metal-coordination {
+    border-left-color: #95a5a6;
+}
+
+/* Header del item de interacción */
+.interaction-header-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.interaction-header-item i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.interaction-type {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+/* Detalles de la interacción */
+.interaction-details {
+    margin-bottom: 0.8rem;
+}
+
+.interaction-details > div {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.interaction-details strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.interaction-residue {
+    color: #2c3e50;
+}
+
+.interaction-distance {
+    color: #8e44ad;
+}
+
+.interaction-energy {
+    color: #27ae60;
+}
+
+.interaction-atoms {
+    color: #7f8c8d;
+    font-family: 'Courier New', monospace;
+}
+
+/* Acciones de interacción */
+.interaction-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.highlight-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.highlight-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Mensajes de error y estado */
+.interactions-error,
+.no-interactions {
+    text-align: center;
+    padding: 2rem;
+    background: #fdf2f2;
+    border-radius: var(--border-radius);
+    color: #721c24;
+}
+
+.no-interactions {
+    background: #f8f9fa;
+    color: var(--text-color);
+}
+
+.interactions-error i,
+.no-interactions i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.interactions-error h4,
+.no-interactions h4 {
+    margin: 0 0 0.5rem 0;
+    color: inherit;
+}
+
+.interactions-error ul,
+.no-interactions ul {
+    text-align: left;
+    max-width: 300px;
+    margin: 1rem auto;
+}
+
+.retry-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.retry-btn:hover {
+    background: #2980b9;
+}
+
+/* Estadísticas de interacciones */
+.interaction-statistics {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.interaction-statistics h5 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+}
+
+.stat-item {
+    background: white;
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+}
+
+.stat-item i {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--light-text);
+    margin-bottom: 0.2rem;
+}
+
+.stat-count {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .interactions-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .interaction-actions {
+        justify-content: center;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.interaction-item {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.interaction-item:nth-child(1) { animation-delay: 0.1s; }
+.interaction-item:nth-child(2) { animation-delay: 0.2s; }
+.interaction-item:nth-child(3) { animation-delay: 0.3s; }
+.interaction-item:nth-child(4) { animation-delay: 0.4s; }
+.interaction-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Loading spinner mejorado */
+.interactions-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--light-text);
+}
+
+.interactions-loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.clickable-interaction {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.clickable-interaction::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.clickable-interaction:hover::before {
+    left: 100%;
+}
+
+.clickable-interaction:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left-width: 6px;
+}
+
+/* Mejorar el estado highlighted */
+.interaction-item.highlighted {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-left-color: #1976d2;
+    border-left-width: 6px;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+    transform: translateX(6px);
+    position: relative;
+    z-index: 10;
+}
+
+.interaction-item.highlighted::after {
+    content: '👁️';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    animation: pulse-eye 2s infinite;
+}
+
+@keyframes pulse-eye {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Mejorar el estado activo */
+.interaction-item.active-interaction {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-left-color: #f57c00;
+    animation: glow-active 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-active {
+    from { box-shadow: 0 0 5px rgba(245, 124, 0, 0.3); }
+    to { box-shadow: 0 0 15px rgba(245, 124, 0, 0.6); }
+}
+
+/* Mejorar botones de highlight */
+.highlight-btn {
+    background: linear-gradient(135deg, var(--primary-color), #2980b9);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #1976d2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicador visual para clickeabilidad */
+.clickable-interaction .interaction-type::after {
+    content: ' 👆';
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-left: 0.3rem;
+    transition: opacity 0.3s ease;
+}
+
+.clickable-interaction:hover .interaction-type::after {
+    opacity: 1;
+    animation: point 1s ease-in-out infinite;
+}
+
+@keyframes point {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+/* Tooltip para interacciones */
+.clickable-interaction {
+    position: relative;
+}
+
+.clickable-interaction::after {
+    content: 'Clic para resaltar en vista 3D';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.clickable-interaction:hover::after {
+    opacity: 1;
+}
+
+/* Mejorar apariencia de emojis en dispositivos que no los soporten */
+@supports not (font-family: "Apple Color Emoji") {
+    .interaction-residue::before { content: "🧬 "; }
+    .interaction-distance::before { content: "📏 "; }
+    .interaction-energy::before { content: "⚡ "; }
+    .interaction-atoms::before { content: "⚛️ "; }
+}
+
+/* Panel de información de interacciones en el visor 3D */
+.interaction-info-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.interaction-info-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.interaction-info-content i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.interaction-info-text strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.interaction-info-details {
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+
+.close-info-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: var(--light-text);
+    cursor: pointer;
+    padding: 0.2rem;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close-info-btn:hover {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--error-color);
+}
+
+/* Animaciones de entrada para elementos */
+.interaction-item {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideInUp 0.4s ease forwards;
+}
+
+.interaction-item:nth-child(1) { animation-delay: 0.1s; }
+.interaction-item:nth-child(2) { animation-delay: 0.2s; }
+.interaction-item:nth-child(3) { animation-delay: 0.3s; }
+.interaction-item:nth-child(4) { animation-delay: 0.4s; }
+.interaction-item:nth-child(5) { animation-delay: 0.5s; }
+.interaction-item:nth-child(6) { animation-delay: 0.6s; }
+.interaction-item:nth-child(7) { animation-delay: 0.7s; }
+.interaction-item:nth-child(8) { animation-delay: 0.8s; }
+.interaction-item:nth-child(9) { animation-delay: 0.9s; }
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mejora para el grid de interacciones */
+#interactionsList.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#interactionsList.grid-view .interaction-item {
+    margin-bottom: 0;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .clickable-interaction::after {
+        display: none; /* Ocultar tooltip en móviles */
+    }
+    
+    .interaction-item.highlighted::after {
+        top: 5px;
+        right: 5px;
+        font-size: 1rem;
+    }
+    
+    .highlight-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Estados de focus para accesibilidad */
+.clickable-interaction:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.highlight-btn:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}

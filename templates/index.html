@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayhoffDock - Docking Molecular</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/interactions.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-atom"></i> DayhoffDock: Docking Molecular</h1>
+            <p>Sistema de simulación de docking molecular</p>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link active"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url_for('education') }}" class="nav-link"><i class="fas fa-book"></i> Guía Educativa</a>
+                <a href="{{ url_for('tutorials') }}" class="nav-link"><i class="fas fa-graduation-cap"></i>
+                    Tutoriales</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <form id="dockingForm" enctype="multipart/form-data">
+                    <div class="file-upload-container">
+                        <div class="file-upload-box">
+                            <label for="receptor">
+                                <i class="fas fa-atom"></i>
+                                <span>Receptor</span>
+                                <small>Sube el archivo del receptor (PDB, PDBQT)</small>
+                            </label>
+                            <input type="file" id="receptor" name="receptor" accept=".pdb,.pdbqt" required>
+                            <div class="file-name" id="receptorName">No se ha seleccionado archivo</div>
+                        </div>
+
+                        <div class="file-upload-box">
+                            <label for="ligand">
+                                <i class="fas fa-capsules"></i>
+                                <span>Ligando</span>
+                                <small>Sube el archivo del ligando (PDB, MOL2, SDF, PDBQT)</small>
+                            </label>
+                            <input type="file" id="ligand" name="ligand" accept=".pdb,.mol2,.sdf,.pdbqt" required>
+                            <div class="file-name" id="ligandName">No se ha seleccionado archivo</div>
+                        </div>
+
+                        <div class="file-upload-box optional">
+                            <label for="config">
+                                <i class="fas fa-cog"></i>
+                                <span>Configuración</span>
+                                <small>Opcional: Archivo de configuración personalizada</small>
+                            </label>
+                            <input type="file" id="config" name="config" accept=".txt,.conf">
+                            <div class="file-name" id="configName">No se ha seleccionado archivo</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-play"></i> Iniciar Docking
+                    </button>
+                </form>
+            </div>
+
+            <div class="progress-section hidden" id="progressSection">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="statusText">Procesando...</p>
+            </div>
+
+            <div class="results-section hidden" id="resultsSection">
+                <h2>Resultados del Docking</h2>
+
+                <div class="results-container">
+                    <div class="affinity-table">
+                        <h3>Energías de Afinidad</h3>
+                        <table id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>Modo</th>
+                                    <th>Afinidad (kcal/mol)</th>
+                                    <th>RMSD (Å)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsBody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="visualization">
+                        <h3>Visualización 3D</h3>
+                        <div id="viewer" class="molecule-viewer"></div>
+
+                        <button id="openVisualizationBtn" class="download-btn">
+                            <i class="fas fa-eye"></i> Vista Detallada
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-section hidden" id="errorSection">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorText"></span>
+                </div>
+            </div>
+
+            <div class="educational-info">
+                <h3><i class="fas fa-lightbulb"></i> ¿Quieres aprender más sobre docking molecular?</h3>
+                <p>Explora nuestra <a href="{{ url_for('education') }}">Guía Educativa</a> para entender los fundamentos
+                    teóricos o sigue nuestros <a href="{{ url_for('tutorials') }}">Tutoriales Prácticos</a> paso a paso.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 DayhoffDock. Todos los derechos reservados.</p>
+            <div class="developers-footer">
+                Desarrollado por Johan Granados • Andrés Pereañez • Lina Preciado
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal para visualización 3D -->
+    <div id="visualizationModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Visualización Detallada del Docking</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="3d">Vista 3D</button>
+                    <button class="tab-btn" data-tab="interactions">Interacciones</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Contenido de la pestaña Vista 3D -->
+                <div class="tab-content active" id="view3d-content">
+                    <div class="modal-viewer-container">
+                        <div id="modalViewer" class="modal-viewer"></div>
+                        <div class="view-controls">
+                            <button id="stickView" class="view-control-btn">
+                                <i class="fas fa-grip-lines-vertical"></i> Bastones
+                            </button>
+                            <button id="sphereView" class="view-control-btn">
+                                <i class="fas fa-circle"></i> Esferas
+                            </button>
+                            <button id="surfaceView" class="view-control-btn">
+                                <i class="fas fa-water"></i> Superficie
+                            </button>
+                            <button id="cartoonView" class="view-control-btn active">
+                                <i class="fas fa-draw-polygon"></i> Ribbon
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido de la pestaña Interacciones -->
+                <div class="tab-content" id="interactions-content">
+                    <div class="interactions-container">
+                        <div class="interactions-list">
+                            <h3>Interacciones Detectadas</h3>
+                            <div id="interactionsList"></div>
+                        </div>
+                        <div class="interactions-viewer">
+                            <div id="interactionsViewer" class="interactions-3d-viewer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="download-options">
+                    <button id="downloadPdbqt" class="download-btn">
+                        <i class="fas fa-download"></i> PDBQT
+                    </button>
+                    <button id="downloadPdb" class="download-btn">
+                        <i class="fas fa-download"></i> PDB
+                    </button>
+                    <button id="downloadImage" class="download-btn">
+                        <i class="fas fa-camera"></i> Imagen
+                    </button>
+                </div>
+                <button id="closeModal" class="close-btn">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NGL Viewer -->
+    <script src="https://unpkg.com/ngl@2.4.0/dist/ngl.js"></script>
+
+    <!-- Sistema de Visualización Modular -->
+    <script src="/static/js/visualization.js"></script>
+
+    <!-- Archivo JavaScript principal -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Ejemplos -->
+    <script src="{{ url_for('static', filename='js/examples.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayhoffDock - {{ tutorial_name }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/education.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tutorials.css') }}">
+    <style>
+        .under-construction {
+            text-align: center;
+            padding: 3rem;
+            margin: 2rem 0;
+            background-color: var(--light-blue);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .under-construction i {
+            font-size: 4rem;
+            color: var(--warning-color);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .under-construction h2 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .under-construction p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .level-badge.beginner {
+            background-color: var(--light-green);
+            color: var(--beginner-color);
+        }
+        
+        .level-badge.intermediate {
+            background-color: var(--light-yellow);
+            color: var(--intermediate-color);
+        }
+        
+        .level-badge.advanced {
+            background-color: var(--light-red);
+            color: var(--advanced-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-atom"></i> DayhoffDock: Tutoriales</h1>
+            <p>Aprende a utilizar el docking molecular paso a paso</p>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url_for('education') }}" class="nav-link"><i class="fas fa-book"></i> Guía Educativa</a>
+                <a href="{{ url_for('tutorials') }}" class="nav-link active"><i class="fas fa-graduation-cap"></i> Tutoriales</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="under-construction">
+                <i class="fas fa-tools"></i>
+                <h2>{{ tutorial_name }}</h2>
+                <div class="level-badge {% if tutorial_level == 'Principiante' %}beginner{% elif tutorial_level == 'Intermedio' %}intermediate{% else %}advanced{% endif %}">
+                    Nivel: {{ tutorial_level }}
+                </div>
+                <p>Este tutorial está actualmente en desarrollo.</p>
+                <p>Estamos trabajando para ofrecerte la mejor experiencia de aprendizaje sobre docking molecular.</p>
+                <p>Vuelve pronto para acceder a este contenido.</p>
+                <a href="{{ url_for('tutorials') }}" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Volver a Tutoriales
+                </a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 DayhoffDock. Todos los derechos reservados.</p>
+            <div class="developers-footer">
+                Desarrollado por Johan Granados • Andrés Pereañez • Lina Preciado
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
